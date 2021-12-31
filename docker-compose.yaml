@@ -1,0 +1,14 @@
+version: '3'
+services:
+  db:
+    build: .
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: juno
+      POSTGRES_INITDB_ARGS: '--encoding=UTF-8'
+      TZ: "Asia/Tokyo"
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d

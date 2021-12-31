@@ -1,0 +1,16 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5433,
+  "username": "admin",
+  "password": "admin",
+  "database": "juno",
+  "entities": ["dist/entities/**/*.entity.js"],
+  "migrations": ["dist/migrations/**/*.js"],
+  "logging": true,
+  "synchronize": false,
+  "cli": {
+    "entitiesDir": "src/entities",
+    "migrationsDir": "src/migrations"
+  }
+}
