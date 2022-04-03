@@ -1,15 +1,28 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { RolePermissionService } from './role-permission.service';
+import { getRepositoryToken } from '@nestjs/typeorm';
+// import { Repository } from 'typeorm';
 
-describe('UserService', () => {
-  let service: RolePermissionService;
+import { UserRole } from 'src/entities/user-role.entity';
+import { UserRoleService } from 'src/user-role/user-role.service';
+// import { MockType } from 'src/types/mock-type';
+import { repositoryMockFactory } from './role-permission.service.mock';
+
+describe('RolePermissionService', () => {
+  let service: UserRoleService;
+  // let repositoryMock: MockType<Repository<UserRole>>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [RolePermissionService],
+      providers: [
+        UserRoleService,
+        {
+          provide: getRepositoryToken(UserRole),
+          useFactory: repositoryMockFactory,
+        },
+      ],
     }).compile();
-
-    service = module.get<RolePermissionService>(RolePermissionService);
+    service = module.get<UserRoleService>(UserRoleService);
+    // repositoryMock = module.get(getRepositoryToken(UserRole));
   });
 
   it('should be defined', () => {
